@@ -5,7 +5,7 @@
 module.exports = async function(ctx,next){
 	const allowOrigin = [ 'https://www.xxx.com','localhost','127.0.0.1' ];
 	const reg = new RegExp(`(${allowOrigin.join('|')})`);
-	const origin = ctx.request.headers.origin || ctx.request.origin;
+	const origin = ctx.request.headers.origin || ctx.request.headers.referer || ctx.request.origin;
 	const result = reg.test(origin);
 	if(!result) return ctx.body = '';
 	
